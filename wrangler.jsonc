@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "akkusha-menu-2026",
+  "main": "./src/index.js",
+  "compatibility_date": "2026-09-26",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*"
+    ]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "akkusha-likes",
+      "database_id": "be472ad6-db58-4e09-aa68-9174641f455b"
+    }
+  ]
+}

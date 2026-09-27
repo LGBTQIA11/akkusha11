@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Akkusha Admin</title><link rel="stylesheet" href="style.css"></head>
+<body style="background:#050505;color:#fff;font-family:Arial,sans-serif;padding:24px">
+<h1>Akkusha Admin</h1><p>Owner-only Like counts. Enter the Worker <code>ADMIN_TOKEN</code>.</p>
+<input id="token" type="password" placeholder="ADMIN_TOKEN" style="padding:12px;width:min(100%,420px)"> <button id="load" style="padding:12px 18px">Load</button>
+<div id="result" style="margin-top:24px"></div>
+<script>document.getElementById('load').onclick=async()=>{const token=document.getElementById('token').value;const r=document.getElementById('result');r.textContent='Loading...';try{const res=await fetch('/api/admin/likes',{headers:{'X-Admin-Token':token}});const data=await res.json();if(!res.ok){r.textContent=data.error||'Unauthorized';return}r.innerHTML='<ul>'+data.works.map(w=>'<li>'+String(w.title).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))+' — '+w.like_count+'</li>').join('')+'</ul>'}catch(e){r.textContent='Connection error'}};</script>
+</body></html>

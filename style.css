@@ -1,0 +1,263 @@
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: url("background.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+.home {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Bright yellow capsule: horizontal, with a smaller right gap and a larger left gap. */
+.flow-capsule {
+  position: fixed;
+  z-index: 20;
+  left: 18%;
+  right: 7%;
+  bottom: 34px;
+  min-height: 64px;
+  padding: 12px 28px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fff35c 0%, #ffe21c 48%, #f4ca00 100%);
+  box-shadow:
+    0 0 12px rgba(255, 239, 52, 0.9),
+    0 0 28px rgba(255, 218, 20, 0.72),
+    0 10px 26px rgba(0, 0, 0, 0.36);
+  color: #6B6BFF;
+  cursor: pointer;
+  font: inherit;
+  font-size: clamp(17px, 2.8vw, 28px);
+  font-style: italic;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-align: center;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.flow-capsule:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 16px rgba(255, 239, 52, 1),
+    0 0 34px rgba(255, 218, 20, 0.86),
+    0 12px 30px rgba(0, 0, 0, 0.38);
+}
+
+.flow-capsule:active {
+  transform: translateY(0);
+}
+
+.flow-capsule:focus-visible,
+.close-button:focus-visible,
+.menu-item:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 4px;
+}
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 8vh 5vw 9vh;
+  background: rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.menu-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu-panel {
+  position: relative;
+  width: min(90vw, 590px);
+  height: min(80vh, 650px);
+  overflow: hidden;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #050505;
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.62),
+    inset 0 0 80px rgba(0, 0, 0, 0.35);
+  transform: translateY(16px) scale(0.985);
+  transition: transform 220ms ease;
+}
+
+.menu-overlay.is-open .menu-panel {
+  transform: translateY(0) scale(1);
+}
+
+/* No red rectangles behind section names: labels sit directly on the galaxy. */
+.menu-list {
+  position: absolute;
+  inset: 92px 58px 42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: clamp(28px, 5.2vh, 46px);
+  overflow-y: auto;
+  padding: 8px 0 20px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 23px;
+  min-height: 62px;
+  color: #c40000;
+  text-decoration: none;
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.95),
+    0 0 8px rgba(0, 0, 0, 0.85);
+  transition: transform 150ms ease, color 150ms ease;
+}
+
+.menu-item:hover {
+  transform: translateX(4px);
+  color: #e00000;
+}
+
+.menu-icon {
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 3px 9px rgba(0, 0, 0, 0.8));
+}
+
+.menu-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.menu-label {
+  font-size: clamp(25px, 5vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.simple-icon,
+.trophy-icon {
+  font-size: 48px;
+  line-height: 1;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+.trophy-icon {
+  transform: scaleX(1.05);
+}
+
+.close-button {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 2;
+  width: 56px;
+  height: 56px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.64);
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 42px;
+  font-weight: 300;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.close-button:hover {
+  background: rgba(0, 0, 0, 0.82);
+  transform: rotate(5deg) scale(1.03);
+}
+
+@media (max-width: 620px) {
+  .flow-capsule {
+    left: 18%;
+    right: 7%;
+    bottom: 28px;
+    min-height: 60px;
+    padding-inline: 20px;
+  }
+
+  .menu-overlay {
+    padding: 9vh 4vw 7vh;
+  }
+
+  .menu-panel {
+    width: 92vw;
+    height: 80vh;
+    border-radius: 28px;
+    background: #050505;
+  }
+
+  .menu-list {
+    inset: 94px 30px 28px;
+    gap: 30px;
+  }
+
+  .menu-item {
+    gap: 17px;
+  }
+
+  .menu-icon {
+    flex-basis: 54px;
+    width: 54px;
+    height: 54px;
+  }
+
+  .menu-label {
+    font-size: clamp(23px, 7vw, 34px);
+  }
+
+  .close-button {
+    width: 50px;
+    height: 50px;
+    top: 15px;
+    right: 15px;
+    font-size: 37px;
+  }
+}
+
+/* Akkusha Like system — only applies when a work card contains .like-button. */
+.like-button {
+  border: 0;
+  background: transparent;
+  padding: 4px;
+  margin: 0;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  filter: saturate(1.15);
+}
+.like-button:disabled { cursor: default; opacity: .85; }
+.like-button.liked { transform: scale(1.08); }

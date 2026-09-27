@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#05050a">
+  <title>Akkusha</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="home" aria-label="Akkusha">
+    <!-- The original river/landscape background remains untouched. -->
+    <button id="openMenu" class="flow-capsule" type="button" aria-controls="menuPanel" aria-expanded="false">
+      <span>In Akkusha flow....</span>
+    </button>
+  </main>
+
+  <div id="menuOverlay" class="menu-overlay" hidden>
+    <section id="menuPanel" class="menu-panel" role="dialog" aria-modal="true" aria-label="Akkusha navigation">
+      <button id="closeMenu" class="close-button" type="button" aria-label="Close menu">×</button>
+
+      <nav class="menu-list" aria-label="Main sections">
+        <a class="menu-item" href="#music">
+          <span class="menu-icon music-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" role="img" focusable="false">
+              <defs>
+                <clipPath id="musicClip"><path d="M39 10h7v31.2a10.9 10.9 0 1 1-7-10.2V10zm-7 31.5a5 5 0 1 0 5 5v-5h-5z"/></clipPath>
+                <linearGradient id="mlmMusic" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#0b5b43"/><stop offset="14.285%" stop-color="#0f9e8f"/><stop offset="28.57%" stop-color="#8fd36b"/><stop offset="42.855%" stop-color="#fff"/><stop offset="57.14%" stop-color="#93d8ee"/><stop offset="71.425%" stop-color="#446bd7"/><stop offset="85.71%" stop-color="#39246f"/><stop offset="100%" stop-color="#241746"/>
+                </linearGradient>
+              </defs><path fill="url(#mlmMusic)" d="M39 10h7v31.2a10.9 10.9 0 1 1-7-10.2V10zm-7 31.5a5 5 0 1 0 5 5v-5h-5z"/>
+            </svg>
+          </span><span class="menu-label">Music</span>
+        </a>
+
+        <a class="menu-item" href="#photography">
+          <span class="menu-icon camera-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" role="img" focusable="false">
+              <defs><linearGradient id="mlmCamera2" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#0b5b43"/><stop offset="14.285%" stop-color="#0f9e8f"/><stop offset="28.57%" stop-color="#8fd36b"/><stop offset="42.855%" stop-color="#fff"/><stop offset="57.14%" stop-color="#93d8ee"/><stop offset="71.425%" stop-color="#446bd7"/><stop offset="85.71%" stop-color="#39246f"/><stop offset="100%" stop-color="#241746"/></linearGradient></defs>
+              <rect x="7" y="18" width="50" height="38" rx="4" fill="url(#mlmCamera2)"/>
+              <rect x="13" y="24" width="38" height="26" rx="2" fill="#05050a"/>
+              <path d="M20 18l4-8h16l4 8" fill="url(#mlmCamera2)"/>
+              <circle cx="32" cy="37" r="10" fill="#05050a" stroke="url(#mlmCamera2)" stroke-width="4"/>
+            </svg>
+          </span><span class="menu-label">Photography</span>
+        </a>
+
+        <a class="menu-item" href="#astronomy">
+          <span class="menu-icon simple-icon" aria-hidden="true">🔭</span>
+          <span class="menu-label">Astronomy</span>
+        </a>
+
+        <a class="menu-item" href="#ufology">
+          <span class="menu-icon simple-icon" aria-hidden="true">🛸</span>
+          <span class="menu-label">Ufology</span>
+        </a>
+
+        <a class="menu-item" href="#contest">
+          <span class="menu-icon trophy-icon" aria-hidden="true">🏆</span>
+          <span class="menu-label">Contest</span>
+        </a>
+      </nav>
+    </section>
+  </div>
+
+  <script>
+    const openMenu = document.getElementById('openMenu');
+    const closeMenu = document.getElementById('closeMenu');
+    const overlay = document.getElementById('menuOverlay');
+
+    function setMenu(open) {
+      openMenu.setAttribute('aria-expanded', String(open));
+      if (open) {
+        overlay.hidden = false;
+        requestAnimationFrame(() => overlay.classList.add('is-open'));
+        closeMenu.focus();
+        document.body.classList.add('menu-open');
+      } else {
+        overlay.classList.remove('is-open');
+        document.body.classList.remove('menu-open');
+        window.setTimeout(() => {
+          if (!overlay.classList.contains('is-open')) overlay.hidden = true;
+        }, 220);
+        openMenu.focus();
+      }
+    }
+
+    openMenu.addEventListener('click', () => setMenu(true));
+    closeMenu.addEventListener('click', () => setMenu(false));
+    overlay.addEventListener('click', (event) => {
+      if (event.target === overlay) setMenu(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !overlay.hidden) setMenu(false);
+    });
+  </script>
+</body>
+</html>
