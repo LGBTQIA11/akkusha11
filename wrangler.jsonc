@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "akkusha-menu-2026",
+  "name": "akkusha11",
   "main": "./src/index.js",
   "compatibility_date": "2026-09-26",
   "assets": {
@@ -15,6 +15,12 @@
       "binding": "DB",
       "database_name": "akkusha-likes",
       "database_id": "be472ad6-db58-4e09-aa68-9174641f455b"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "akkusha-media"
     }
   ]
 }
